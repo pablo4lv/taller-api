@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clima</title>
+</head>
+<body>
+    <h1>Clima</h1>
+    <input type="text" id="lugar">
+    <button onclick="climate()">Buscar</button>
+    <p id="clima"></p>
+    
+
+    <script>
+        let lugar = document.getElementById("lugar");
+        let parrafo = document.getElementById("clima");
+        let btn = document.getElementsByTagName("button");
+
+        const key = "065dd78f5498431fbc133323230209";
+        const api = `http://api.weatherapi.com/v1/current.json?key=${key}&lang=es&q=`;
+
+        async function climate(){
+            let search = api+lugar.value.toString();
+            fetch(search)
+                .then(response => response.json()) 
+                .then(json => 
+                    parrafo.innerHTML = `
+                        <li>Locación: ${json.location.name}</li>
+                        <li>Clima: ${json.current.condition.text} - ${json.current.temp_c}°C</li>
+                    `
+                )
+        }
+    </script>
+</body>
+</html>
