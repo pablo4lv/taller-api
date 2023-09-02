@@ -26,7 +26,7 @@
                 .then(response => response.json()) 
                 .then(json => 
                     parrafo.innerHTML = `
-                        <li>Locación: ${json.location.name}</li>
+                        <li>Locación: ${json.location.name}, ${json.location.country}</li>
                         <li>Clima: ${json.current.condition.text} - ${json.current.temp_c}°C</li>
                     `
                 )
